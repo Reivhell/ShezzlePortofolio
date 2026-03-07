@@ -2,12 +2,12 @@
 
 import { useState } from 'react'
 import { AnimatePresence } from 'framer-motion'
-import WelcomeScreen from '../components/WelcomeScreen'
-import Navbar from '../components/Navbar'
-import HeroSection from '../sections/HeroSection'
-import AboutSection from '../sections/AboutSection'
-import PortfolioSection from '../sections/PortfolioSection'
-import ContactSection from '../sections/ContactSection'
+import WelcomeScreen from '@/components/ui/WelcomeScreen'
+import Navbar from '@/components/ui/Navbar'
+import HeroSection from '@/components/sections/HeroSection'
+import AboutSection from '@/components/sections/AboutSection'
+import PortfolioSection from '@/components/sections/PortfolioSection'
+import ContactSection from '@/components/sections/ContactSection'
 
 export default function LandingPage() {
   const [showWelcome, setShowWelcome] = useState(true)

@@ -1,9 +1,10 @@
+
 'use client'
 
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase'
 import { Mail, MapPin, Phone, Send, Loader2, Sparkles } from 'lucide-react'
-import InputField from '../components/InputField'
+import InputField from '@/components/ui/InputField'
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({

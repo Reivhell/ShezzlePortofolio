@@ -1,5 +1,5 @@
-import Footer from '../components/Footer'
-import Background from '../components/Background'
+import Footer from '@/components/ui/Footer'
+import Background from '@/components/ui/Background'
 
 export default function LandingLayout({
   children,

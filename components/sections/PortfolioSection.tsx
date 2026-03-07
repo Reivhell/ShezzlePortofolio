@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase'
-import CardProject from '../components/CardProject'
+import CardProject from '@/components/ui/CardProject'
 import { Sparkles } from 'lucide-react'
 import type { Project } from '@/types'
 
