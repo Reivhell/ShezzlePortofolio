@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase-server'
+import { createClient } from '@supabase/supabase-js'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -36,8 +36,11 @@ const TECH_ICONS: Record<string, ElementType> = {
 }
 
 export async function generateStaticParams() {
-  const supabase = await createClient()
-  const { data: projects } = await supabase.from('projects').select('slug')
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  )
+  const { data: projects } = await supabase.from('projects').select('slug, title')
 
   return projects?.map((project) => ({
     slug: project.slug || slugify(project.title),
@@ -46,7 +49,10 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: ProjectPageProps) {
   const { slug } = await params
-  const supabase = await createClient()
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  )
   const { data: project } = await supabase
     .from('projects')
     .select('*')
@@ -99,7 +105,10 @@ function FeatureItem({ feature }: { feature: string }) {
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = await params
-  const supabase = await createClient()
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  )
 
   const { data: project, error } = await supabase
     .from('projects')
