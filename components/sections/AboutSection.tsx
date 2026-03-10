@@ -166,7 +166,7 @@ export default function AboutSection() {
           <div className="space-y-6 text-center lg:text-left">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6366f1] to-[#a855f7]">
-                Hello, I'm
+                Hello, I&apos;m
               </span>
               <span className="block mt-2 text-gray-200">Ahmad David Alvees</span>
             </h2>
@@ -187,7 +187,7 @@ export default function AboutSection() {
               </div>
               
               <blockquote className="text-gray-300 text-center lg:text-left italic font-medium text-sm relative z-10 pl-6">
-                "Technology is not just a tool. It is the bridge between imagination and reality, transforming ideas into experiences that uplift the human spirit."
+                &quot;Technology is not just a tool. It is the bridge between imagination and reality, transforming ideas into experiences that uplift the human spirit.&quot;
               </blockquote>
             </div>
 

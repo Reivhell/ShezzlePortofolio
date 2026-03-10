@@ -20,19 +20,16 @@ const NAV_ITEMS = [
   { href: '/dashboard/comments', label: 'Comments', icon: MessageSquare },
 ]
 
-export default function DashboardSidebar() {
-  const pathname = usePathname()
-  const router = useRouter()
-  const supabase = createBrowserClient()
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-
-  const handleLogout = async () => {
-    await supabase.auth.signOut()
-    router.push('/login')
-    router.refresh()
-  }
-
-  const SidebarContent = () => (
+function SidebarContent({
+  pathname,
+  onNavigate,
+  onLogout,
+}: {
+  pathname: string
+  onNavigate: () => void
+  onLogout: () => void
+}) {
+  return (
     <div className="flex flex-col h-full p-5 gap-6">
       {/* Logo */}
       <div className="flex items-center gap-3 px-1 shrink-0">
@@ -63,7 +60,7 @@ export default function DashboardSidebar() {
             <Link
               key={href}
               href={href}
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={onNavigate}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 text-sm font-medium shrink-0 ${
                 active
                   ? 'bg-gradient-to-r from-indigo-500/20 to-purple-500/15 border border-indigo-500/30 text-white'
@@ -80,7 +77,7 @@ export default function DashboardSidebar() {
 
       {/* Logout */}
       <button
-        onClick={handleLogout}
+        onClick={onLogout}
         className="shrink-0 flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-500 hover:text-red-400 hover:bg-red-500/5 border border-transparent hover:border-red-500/15 transition-all duration-200 text-sm"
       >
         <LogOut className="w-4 h-4 shrink-0" />
@@ -88,6 +85,19 @@ export default function DashboardSidebar() {
       </button>
     </div>
   )
+}
+
+export default function DashboardSidebar() {
+  const pathname = usePathname()
+  const router = useRouter()
+  const supabase = createBrowserClient()
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut()
+    router.push('/login')
+    router.refresh()
+  }
 
   return (
     <>
@@ -102,7 +112,11 @@ export default function DashboardSidebar() {
 
       {/* Sidebar - Desktop */}
       <aside className="hidden lg:flex w-60 shrink-0 flex-col border-r border-white/10 bg-[#0a0a1a] fixed h-screen">
-        <SidebarContent />
+        <SidebarContent
+          pathname={pathname}
+          onNavigate={() => setIsMobileMenuOpen(false)}
+          onLogout={handleLogout}
+        />
       </aside>
 
       {/* Sidebar - Mobile Overlay */}
@@ -113,7 +127,11 @@ export default function DashboardSidebar() {
             onClick={() => setIsMobileMenuOpen(false)}
           />
           <aside className="fixed inset-y-0 left-0 z-50 w-64 flex flex-col border-r border-white/10 bg-[#0a0a1a] lg:hidden">
-            <SidebarContent />
+            <SidebarContent
+              pathname={pathname}
+              onNavigate={() => setIsMobileMenuOpen(false)}
+              onLogout={handleLogout}
+            />
           </aside>
         </>
       )}
